@@ -1,0 +1,6 @@
+build/*
+!build/index.html
+.#*
+
+node_modules/
+typings/
