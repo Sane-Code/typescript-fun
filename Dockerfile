@@ -12,7 +12,7 @@ npm \
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN rm /usr/sbin/node # probably dont need this :P
 
-RUN npm install -g typescript webpack
+RUN npm install -g typescript webpack typings
 
 #remove default nginx files (except mime.types)
 RUN mv /etc/nginx/mime.types /etc/tmp
@@ -25,12 +25,13 @@ WORKDIR /opt/code
 RUN npm link typescript
 
 COPY package.json /opt/code/
+COPY typings.json /opt/code/
 RUN npm install
+RUN typings install
 
 COPY webpack.config.js /opt/code/
 COPY tsconfig.json /opt/code/
 COPY src/ /opt/code/src
-COPY typings/ /opt/code/typings
 
 RUN webpack 
 COPY build/index.html /var/www/
