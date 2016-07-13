@@ -38,6 +38,7 @@ export class Ball {
     }
 
     collideBall(other: Ball) {
+        const restitution = Math.min(this.restitution, other.restitution);
         const collisionNormal = this.position.subtract(other.position).normalize();
         // find components of their velocity along the normal
         const u1 = this.velocity.dotProduct(collisionNormal);
@@ -45,8 +46,8 @@ export class Ball {
         const m1 = this.mass
         const m2 = other.mass
         // solve as a 1 dimension collision: https://en.wikipedia.org/wiki/Elastic_collision
-        const v1 = (u1 * (m1 - m2) + ( u2 * 2 * m2)) / (m1 + m2);
-        const v2 = (u2 * (m2 - m1) + ( u1 * 2 * m1)) / (m1 + m2);
+        const v1 = restitution * ((u1 * (m1 - m2) + ( u2 * 2 * m2)) / (m1 + m2));
+        const v2 = restitution * ((u2 * (m2 - m1) + ( u1 * 2 * m1)) / (m1 + m2));
         // replace original component of velocity with new one
         this.velocity = this.velocity.add(collisionNormal.mult(v1 - u1));
         other.velocity = other.velocity.add(collisionNormal.mult(v2 - u2));
