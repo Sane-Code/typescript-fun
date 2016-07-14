@@ -1,5 +1,9 @@
 {
   "dependencies": {
     "d3": "registry:npm/d3#3.0.0+20160627165201"
+  },
+  "globalDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20160601211834",
+    "mocha": "registry:dt/mocha#2.2.5+20160619032855"
   }
 }

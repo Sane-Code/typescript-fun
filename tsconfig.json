@@ -3,13 +3,10 @@
         "outDir": "./build/",
         "sourceMap": true,
         "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es5",
         "jsx": "react"
-    },
-    "files": [
-        "src/app.ts",
-        "typings/index.d.ts"
-    ]
+    }
 }
